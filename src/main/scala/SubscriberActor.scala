@@ -19,7 +19,7 @@ class SubscriberActor(host: String, port: Int, channel: String)
     onNext(pm.data.decodeString(UTF8))
 }
 
-object SubscribeActor {
+object SubscriberActor {
   def props(host: String, port: Int, channel: String): Props =
     Props(classOf[SubscriberActor], host, port, channel)
 }

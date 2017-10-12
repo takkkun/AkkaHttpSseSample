@@ -72,8 +72,8 @@ object Bootstrap {
   }
 
   private def subscribe(channel: String)(implicit system: ActorSystem): Source[String, NotUsed] = {
-    val subscribeActorRef = system.actorOf(SubscribeActor.props(REDIS_HOST, REDIS_PORT, channel))
-    val publisher = ActorPublisher[String](subscribeActorRef)
+    val subscriberActorRef = system.actorOf(SubscriberActor.props(REDIS_HOST, REDIS_PORT, channel))
+    val publisher = ActorPublisher[String](subscriberActorRef)
     Source.fromPublisher(publisher)
   }
 }
