@@ -7,7 +7,7 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.model.sse.ServerSentEvent
 
 import scala.concurrent.duration._
-import java.time.LocalDateTime
+import java.time.{ LocalDateTime, ZoneId, ZoneOffset }
 import java.time.format.DateTimeFormatter.ISO_DATE_TIME
 
 import scala.io.StdIn
@@ -35,10 +35,19 @@ object Bootstrap {
     path("") {
       get {
         complete {
+          val zoneId = ZoneId.of("Asia/Tokyo")
+          val zoneOffset = ZoneOffset.ofHours(9)
+
           Source
             .tick(2.seconds, 2.seconds, NotUsed)
-            .map(_ => LocalDateTime.now)
-            .map(time => ServerSentEvent(data = ISO_DATE_TIME.format(time)))
+            .map(_ => LocalDateTime.now(zoneId))
+            .map { time =>
+              ServerSentEvent(
+                data = ISO_DATE_TIME.format(time),
+                id = Some(time.toInstant(zoneOffset).getEpochSecond.toString),
+                retry = Some(5)
+              )
+            }
         }
       }
     }
