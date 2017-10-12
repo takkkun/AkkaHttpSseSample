@@ -16,5 +16,6 @@ scalacOptions ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-http" % "10.0.10"
+  "com.typesafe.akka" %% "akka-http" % "10.0.10",
+  "com.github.etaty"  %% "rediscala" % "1.8.0"
 )
