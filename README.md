@@ -1,6 +1,6 @@
 # AkkaHttpSseSample
 
-Akka HTTPでSSEなサンプルです。
+Akka HTTPでPub/Sub + SSEなサンプルです。
 
 以下のコマンドでサーバーを起動します。
 
@@ -11,4 +11,20 @@ sbt> run
 
 終了するにはEnterキーをタイプします。
 
-接続先は http://localhost:8080/ です。2秒置きに現在日時が流れてきます。
+## Subscribe
+
+```
+GET http://localhost:8080/subscribe?channel=CHANNEL_NAME
+```
+
+`CHANNEL_NAME` は任意の文字列です。
+
+## Publish
+
+```
+POST http://localhost:8080/publish
+
+channel=CHANNEL_NAME&message=MESSAGE
+```
+
+`CHANNEL_NAME` で購読しているクライアントに `MESSAGE` を送ります。
