@@ -4,7 +4,7 @@ Akka HTTPでPub/Sub + SSEなサンプルです。
 
 ## Redisサーバー起動
 
-Pub/SubにはRedisを使用しています。あらかじめRedisのサーバーを起動しておいてください。
+PubSubにはRedisを使用しています。あらかじめRedisのサーバーを起動しておいてください。
 
 接続先のホスト名またはポート番号を変更したい場合は `src/main/scala/Bootstrap.scala` の `REDIS_HOST` または `REDIS_PORT` を変更してください。
 
